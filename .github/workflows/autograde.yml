@@ -1,0 +1,405 @@
+name: Autograding
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  AZURE_OPENAI_ENDPOINT: ${{ secrets.AZURE_OPENAI_ENDPOINT }}
+  AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
+  AZURE_OPENAI_DEPLOYMENT: ${{ secrets.AZURE_OPENAI_DEPLOYMENT }}
+  AZURE_EMBEDDING_DEPLOYMENT: ${{ secrets.AZURE_EMBEDDING_DEPLOYMENT }}
+  AZURE_AI_SEARCH_ENDPOINT: ${{ secrets.AZURE_AI_SEARCH_ENDPOINT }}
+  AZURE_AI_SEARCH_KEY: ${{ secrets.AZURE_AI_SEARCH_KEY }}
+  AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT: ${{ secrets.AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT }}
+  AZURE_DOCUMENT_INTELLIGENCE_KEY: ${{ secrets.AZURE_DOCUMENT_INTELLIGENCE_KEY }}
+  STUDENT_CORPUS_SEED: ${{ github.actor }}
+
+jobs:
+  grade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Write .env file for autograder
+        shell: bash
+        run: |
+          {
+            echo "AZURE_OPENAI_ENDPOINT=$AZURE_OPENAI_ENDPOINT"
+            echo "AZURE_OPENAI_API_KEY=$AZURE_OPENAI_API_KEY"
+            echo "AZURE_OPENAI_DEPLOYMENT=$AZURE_OPENAI_DEPLOYMENT"
+            echo "AZURE_EMBEDDING_DEPLOYMENT=$AZURE_EMBEDDING_DEPLOYMENT"
+            echo "AZURE_AI_SEARCH_ENDPOINT=$AZURE_AI_SEARCH_ENDPOINT"
+            echo "AZURE_AI_SEARCH_KEY=$AZURE_AI_SEARCH_KEY"
+            echo "AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT=$AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT"
+            echo "AZURE_DOCUMENT_INTELLIGENCE_KEY=$AZURE_DOCUMENT_INTELLIGENCE_KEY"
+            echo "STUDENT_CORPUS_SEED=$STUDENT_CORPUS_SEED"
+          } > .env
+
+      - name: Run student code
+        run: python app/main.py
+        continue-on-error: true
+
+      - name: Clone autograder
+        uses: actions/checkout@v4
+        with:
+          repository: Tech901/ai102-autograder-tests
+          token: ${{ secrets.AUTOGRADER_PAT }}
+          path: .autograder
+
+      # --- 34 tests, 100 points ---
+      - name: "test_canary_text_intake_populated"
+        id: test1
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_canary_text_intake_populated"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_canary_text_intake_populated -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_canary_safety_blocks_injection"
+        id: test2
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_canary_safety_blocks_injection"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_canary_safety_blocks_injection -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_canary_telemetry_records_calls"
+        id: test3
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_canary_telemetry_records_calls"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_canary_telemetry_records_calls -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_task_name"
+        id: test4
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_task_name"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_task_name -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_status_not_error"
+        id: test5
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_status_not_error"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_status_not_error -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_design_has_architecture"
+        id: test6
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_design_has_architecture"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_design_has_architecture -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_design_rationale_minimum_length"
+        id: test7
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_design_rationale_minimum_length"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_design_rationale_minimum_length -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_eval_has_metrics"
+        id: test8
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_eval_has_metrics"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_eval_has_metrics -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_eval_metrics_positive"
+        id: test9
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_eval_metrics_positive"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_eval_metrics_positive -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_all_output_keys_present"
+        id: test10
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_all_output_keys_present"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_all_output_keys_present -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_metadata_has_timestamp"
+        id: test11
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_metadata_has_timestamp"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_metadata_has_timestamp -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_complaint_routes_to_text"
+        id: test12
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_complaint_routes_to_text"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_complaint_routes_to_text -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_question_routes_to_rag"
+        id: test13
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_question_routes_to_rag"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_question_routes_to_rag -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_photo_routes_to_vision"
+        id: test14
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_photo_routes_to_vision"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_photo_routes_to_vision -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_ambiguous_routes_to_valid"
+        id: test15
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_ambiguous_routes_to_valid"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_ambiguous_routes_to_valid -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_tool_definitions_valid"
+        id: test16
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_tool_definitions_valid"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_tool_definitions_valid -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_injection_blocked"
+        id: test17
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_injection_blocked"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_injection_blocked -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_injection_string_1_blocked"
+        id: test18
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_injection_string_1_blocked"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_injection_string_1_blocked -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_injection_string_2_blocked"
+        id: test19
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_injection_string_2_blocked"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_injection_string_2_blocked -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_safe_input_passes"
+        id: test20
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_safe_input_passes"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_safe_input_passes -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_pii_probe_blocked"
+        id: test21
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_pii_probe_blocked"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_pii_probe_blocked -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_text_pipeline_produces_redacted"
+        id: test22
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_text_pipeline_produces_redacted"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_text_pipeline_produces_redacted -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_all_three_types_processed"
+        id: test23
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_all_three_types_processed"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_all_three_types_processed -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_one_failure_doesnt_crash_others"
+        id: test24
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_one_failure_doesnt_crash_others"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_one_failure_doesnt_crash_others -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_routing_accuracy_threshold"
+        id: test25
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_routing_accuracy_threshold"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_routing_accuracy_threshold -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_safety_block_rate_threshold"
+        id: test26
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_safety_block_rate_threshold"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_safety_block_rate_threshold -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_telemetry_has_timing"
+        id: test27
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_telemetry_has_timing"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_telemetry_has_timing -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_telemetry_call_count_positive"
+        id: test28
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_telemetry_call_count_positive"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_telemetry_call_count_positive -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_nlp_redact_pii_callable"
+        id: test29
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_nlp_redact_pii_callable"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_nlp_redact_pii_callable -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_telemetry_record_call"
+        id: test30
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_telemetry_record_call"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_telemetry_record_call -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_vision_classify_photo_callable"
+        id: test31
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_vision_classify_photo_callable"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_vision_classify_photo_callable -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_rag_search_knowledge_base_callable"
+        id: test32
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_rag_search_knowledge_base_callable"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_rag_search_knowledge_base_callable -v --tb=short"
+          timeout: "5"
+          max-score: "3"
+
+      - name: "test_agent_route_with_agent_callable"
+        id: test33
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_agent_route_with_agent_callable"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_agent_route_with_agent_callable -v --tb=short"
+          timeout: "5"
+          max-score: "2"
+
+      - name: "test_safety_check_injection_callable"
+        id: test34
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "test_safety_check_injection_callable"
+          command: "python -m pytest .autograder/activity08-memphis-311-platform/test_hidden.py::test_safety_check_injection_callable -v --tb=short"
+          timeout: "5"
+          max-score: "2"
+
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1
+        continue-on-error: true
+        env:
+          TEST1_RESULTS: "${{ steps.test1.outputs.result }}"
+          TEST2_RESULTS: "${{ steps.test2.outputs.result }}"
+          TEST3_RESULTS: "${{ steps.test3.outputs.result }}"
+          TEST4_RESULTS: "${{ steps.test4.outputs.result }}"
+          TEST5_RESULTS: "${{ steps.test5.outputs.result }}"
+          TEST6_RESULTS: "${{ steps.test6.outputs.result }}"
+          TEST7_RESULTS: "${{ steps.test7.outputs.result }}"
+          TEST8_RESULTS: "${{ steps.test8.outputs.result }}"
+          TEST9_RESULTS: "${{ steps.test9.outputs.result }}"
+          TEST10_RESULTS: "${{ steps.test10.outputs.result }}"
+          TEST11_RESULTS: "${{ steps.test11.outputs.result }}"
+          TEST12_RESULTS: "${{ steps.test12.outputs.result }}"
+          TEST13_RESULTS: "${{ steps.test13.outputs.result }}"
+          TEST14_RESULTS: "${{ steps.test14.outputs.result }}"
+          TEST15_RESULTS: "${{ steps.test15.outputs.result }}"
+          TEST16_RESULTS: "${{ steps.test16.outputs.result }}"
+          TEST17_RESULTS: "${{ steps.test17.outputs.result }}"
+          TEST18_RESULTS: "${{ steps.test18.outputs.result }}"
+          TEST19_RESULTS: "${{ steps.test19.outputs.result }}"
+          TEST20_RESULTS: "${{ steps.test20.outputs.result }}"
+          TEST21_RESULTS: "${{ steps.test21.outputs.result }}"
+          TEST22_RESULTS: "${{ steps.test22.outputs.result }}"
+          TEST23_RESULTS: "${{ steps.test23.outputs.result }}"
+          TEST24_RESULTS: "${{ steps.test24.outputs.result }}"
+          TEST25_RESULTS: "${{ steps.test25.outputs.result }}"
+          TEST26_RESULTS: "${{ steps.test26.outputs.result }}"
+          TEST27_RESULTS: "${{ steps.test27.outputs.result }}"
+          TEST28_RESULTS: "${{ steps.test28.outputs.result }}"
+          TEST29_RESULTS: "${{ steps.test29.outputs.result }}"
+          TEST30_RESULTS: "${{ steps.test30.outputs.result }}"
+          TEST31_RESULTS: "${{ steps.test31.outputs.result }}"
+          TEST32_RESULTS: "${{ steps.test32.outputs.result }}"
+          TEST33_RESULTS: "${{ steps.test33.outputs.result }}"
+          TEST34_RESULTS: "${{ steps.test34.outputs.result }}"
+        with:
+          runners: test1,test2,test3,test4,test5,test6,test7,test8,test9,test10,test11,test12,test13,test14,test15,test16,test17,test18,test19,test20,test21,test22,test23,test24,test25,test26,test27,test28,test29,test30,test31,test32,test33,test34

@@ -1,0 +1,21 @@
+{
+  "pipelines": {
+    "text": {
+      "description": "Text complaint NLP pipeline",
+      "handler": "nlp_pipeline.process_complaint",
+      "input_indicators": ["complaint", "report", "broken", "damaged", "noise", "leak"]
+    },
+    "photo": {
+      "description": "Inspection photo vision pipeline",
+      "handler": "vision_pipeline.process_photo",
+      "input_indicators": [".jpg", ".png", ".jpeg", "photo", "image", "picture"]
+    },
+    "question": {
+      "description": "Citizen question RAG pipeline",
+      "handler": "rag_pipeline.process_question",
+      "input_indicators": ["what", "when", "where", "how", "who", "?"]
+    }
+  },
+  "default_pipeline": "text",
+  "safety_required": true
+}

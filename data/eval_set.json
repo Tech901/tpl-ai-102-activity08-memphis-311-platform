@@ -1,0 +1,22 @@
+[
+  {"id": 1, "input": "Huge crack in the road on Union Avenue", "expected_pipeline": "text", "expected_category": "Pothole"},
+  {"id": 2, "input": "data/inspection_photo.jpg", "expected_pipeline": "photo"},
+  {"id": 3, "input": "When is bulk trash pickup in Whitehaven?", "expected_pipeline": "question"},
+  {"id": 4, "input": "Loud construction noise at 2 AM on Front Street", "expected_pipeline": "text", "expected_category": "Noise Complaint"},
+  {"id": 5, "input": "data/damaged_sidewalk.jpg", "expected_pipeline": "photo"},
+  {"id": 6, "input": "How do I report a stray animal in Memphis?", "expected_pipeline": "question"},
+  {"id": 7, "input": "Overflowing dumpster behind the shopping center on Summer Avenue", "expected_pipeline": "text", "expected_category": "Trash/Litter"},
+  {"id": 8, "input": "Broken water main at the corner of Cleveland and Poplar", "expected_pipeline": "text", "expected_category": "Water/Sewer"},
+  {"id": 9, "input": "data/broken_sign.jpg", "expected_pipeline": "photo"},
+  {"id": 10, "input": "What permits do I need for a home renovation?", "expected_pipeline": "question"},
+  {"id": 11, "input": "Three streetlights out on Elvis Presley Boulevard", "expected_pipeline": "text", "expected_category": "Street Light"},
+  {"id": 12, "input": "data/overgrown_lot.jpg", "expected_pipeline": "photo"},
+  {"id": 13, "input": "Where is the nearest recycling drop-off center?", "expected_pipeline": "question"},
+  {"id": 14, "input": "My neighbor's dog barks all night every night", "expected_pipeline": "text", "expected_category": "Noise Complaint"},
+  {"id": 15, "input": "Sinkhole forming near the storm drain on Park Avenue", "expected_pipeline": "text", "expected_category": "Water/Sewer"},
+  {"id": 16, "input": "What are the city's leaf collection dates this fall?", "expected_pipeline": "question"},
+  {"id": 17, "input": "Abandoned vehicle on blocks in a vacant lot on Chelsea Avenue", "expected_pipeline": "text", "expected_category": "Other"},
+  {"id": 18, "input": "data/graffiti_wall.jpg", "expected_pipeline": "photo"},
+  {"id": 19, "input": "How do I get a copy of my property deed from the city?", "expected_pipeline": "question"},
+  {"id": 20, "input": "Road surface buckling from the heat on Airways Boulevard", "expected_pipeline": "text", "expected_category": "Pothole"}
+]
