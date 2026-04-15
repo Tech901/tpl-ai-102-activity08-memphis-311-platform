@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 325" role="img" aria-labelledby="title desc">
+  <title id="title">Defense-in-Depth Safety Pipeline</title>
+  <desc id="desc">Workflow diagram showing the two-layer safety pipeline: citizen input is first scanned against regex injection patterns (fast), then checked by Azure Content Safety API (thorough). Inputs that fail either check are blocked.</desc>
+
+  <defs>
+    <linearGradient id="boxGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E1E1E"/>
+      <stop offset="100%" stop-color="#141414"/>
+    </linearGradient>
+    <linearGradient id="amberBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFBF3B"/>
+      <stop offset="100%" stop-color="#E5A530"/>
+    </linearGradient>
+    <linearGradient id="blueBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2D5A94"/>
+      <stop offset="100%" stop-color="#1E3F6B"/>
+    </linearGradient>
+    <linearGradient id="greenBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8DC63F"/>
+      <stop offset="100%" stop-color="#6FA832"/>
+    </linearGradient>
+    <linearGradient id="redBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E05555"/>
+      <stop offset="100%" stop-color="#C04040"/>
+    </linearGradient>
+    <linearGradient id="underlineGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFBF3B"/>
+      <stop offset="100%" stop-color="#E5A530"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+    <marker id="arrowAmber" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#FFBF3B"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#2D5A94"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#8DC63F"/>
+    </marker>
+    <marker id="arrowRed" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#E05555"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="325" rx="6" fill="#0A0A0A"/>
+
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="18" font-weight="bold" fill="#FAFAFA">Defense-in-Depth Safety Pipeline</text>
+  <rect x="285" y="38" width="330" height="3" rx="1.5" fill="url(#underlineGrad)"/>
+
+  <!-- Stage label -->
+  <text x="25" y="66" font-family="Source Sans 3, Calibri, sans-serif" font-size="10" fill="#888">STEP 5: TWO-LAYER INPUT VALIDATION (AI-102 D1.4)</text>
+
+  <!-- ===== MAIN FLOW: Input → Regex → Content Safety → Safe ===== -->
+
+  <!-- Node: CITIZEN INPUT -->
+  <g filter="url(#shadow)">
+    <rect x="20" y="78" width="130" height="88" rx="5" fill="url(#boxGrad)" stroke="#333" stroke-width="1"/>
+    <rect x="20" y="78" width="4" height="88" rx="2" fill="url(#amberBar)"/>
+  </g>
+  <text x="85" y="103" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="11" font-weight="bold" fill="#FFBF3B">CITIZEN INPUT</text>
+  <line x1="36" y1="113" x2="134" y2="113" stroke="#333" stroke-width="1"/>
+  <text x="85" y="130" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#CCC">Any raw text input</text>
+  <text x="85" y="143" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#CCC">from citizen</text>
+
+  <!-- Arrow 1: Input → Regex -->
+  <line x1="150" y1="122" x2="180" y2="122" stroke="#FFBF3B" stroke-width="1.5" marker-end="url(#arrowAmber)"/>
+  <text x="165" y="113" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#888" font-style="italic">scan</text>
+
+  <!-- Node: REGEX PATTERNS -->
+  <g filter="url(#shadow)">
+    <rect x="190" y="78" width="175" height="88" rx="5" fill="url(#boxGrad)" stroke="#333" stroke-width="1"/>
+    <rect x="190" y="78" width="4" height="88" rx="2" fill="url(#amberBar)"/>
+  </g>
+  <text x="277" y="103" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="11" font-weight="bold" fill="#FFBF3B">REGEX PATTERNS</text>
+  <line x1="206" y1="113" x2="349" y2="113" stroke="#333" stroke-width="1"/>
+  <text x="277" y="130" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#CCC">14 injection patterns</text>
+  <text x="277" y="143" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#CCC">Case-insensitive scan</text>
+  <!-- Tag: FAST -->
+  <rect x="237" y="149" width="80" height="14" rx="7" fill="#1A1A1A" stroke="#FFBF3B" stroke-width="1"/>
+  <text x="277" y="160" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="8" fill="#FFBF3B" font-weight="600">FAST (&lt; 1ms)</text>
+
+  <!-- Arrow 2: Regex → Content Safety -->
+  <line x1="365" y1="122" x2="395" y2="122" stroke="#FFBF3B" stroke-width="1.5" marker-end="url(#arrowAmber)"/>
+  <text x="380" y="113" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#8DC63F" font-weight="600">pass</text>
+
+  <!-- Node: CONTENT SAFETY API -->
+  <g filter="url(#shadow)">
+    <rect x="405" y="78" width="185" height="88" rx="5" fill="url(#boxGrad)" stroke="#333" stroke-width="1"/>
+    <rect x="405" y="78" width="4" height="88" rx="2" fill="url(#blueBar)"/>
+  </g>
+  <text x="497" y="103" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="11" font-weight="bold" fill="#2D5A94">CONTENT SAFETY API</text>
+  <line x1="421" y1="113" x2="574" y2="113" stroke="#333" stroke-width="1"/>
+  <text x="497" y="130" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#CCC">Hate &#xB7; SelfHarm</text>
+  <text x="497" y="143" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#CCC">Sexual &#xB7; Violence</text>
+  <!-- Tag: THOROUGH -->
+  <rect x="452" y="149" width="90" height="14" rx="7" fill="#1A1A1A" stroke="#2D5A94" stroke-width="1"/>
+  <text x="497" y="160" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="8" fill="#2D5A94" font-weight="600">THOROUGH</text>
+
+  <!-- Arrow 3: Content Safety → Safe -->
+  <line x1="590" y1="122" x2="620" y2="122" stroke="#2D5A94" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <text x="605" y="113" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#8DC63F" font-weight="600">pass</text>
+
+  <!-- Node: SAFE -->
+  <g filter="url(#shadow)">
+    <rect x="630" y="78" width="140" height="88" rx="5" fill="url(#boxGrad)" stroke="#333" stroke-width="1"/>
+    <rect x="630" y="78" width="4" height="88" rx="2" fill="url(#greenBar)"/>
+  </g>
+  <text x="700" y="103" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="11" font-weight="bold" fill="#8DC63F">SAFE</text>
+  <line x1="646" y1="113" x2="754" y2="113" stroke="#333" stroke-width="1"/>
+  <text x="700" y="130" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#CCC">Input cleared</text>
+  <text x="700" y="143" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#CCC">Route to pipeline</text>
+  <!-- Tag: APPROVED -->
+  <rect x="660" y="149" width="80" height="14" rx="7" fill="#1A1A1A" stroke="#8DC63F" stroke-width="1"/>
+  <text x="700" y="160" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="8" fill="#8DC63F" font-weight="600">APPROVED</text>
+
+  <!-- ===== BLOCKED branches ===== -->
+
+  <!-- Arrow down from Regex → Blocked 1 -->
+  <line x1="277" y1="166" x2="277" y2="190" stroke="#E05555" stroke-width="1.5" marker-end="url(#arrowRed)"/>
+  <text x="293" y="182" font-family="Source Sans 3, Calibri, sans-serif" font-size="8" fill="#E05555" font-weight="600">fail</text>
+
+  <!-- Blocked 1 -->
+  <g filter="url(#shadow)">
+    <rect x="237" y="200" width="80" height="35" rx="5" fill="url(#boxGrad)" stroke="#E05555" stroke-width="1"/>
+    <rect x="237" y="200" width="4" height="35" rx="2" fill="url(#redBar)"/>
+  </g>
+  <text x="277" y="222" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="10" font-weight="bold" fill="#E05555">Injection</text>
+
+  <!-- Arrow down from Content Safety → Blocked 2 -->
+  <line x1="497" y1="166" x2="497" y2="190" stroke="#E05555" stroke-width="1.5" marker-end="url(#arrowRed)"/>
+  <text x="513" y="182" font-family="Source Sans 3, Calibri, sans-serif" font-size="8" fill="#E05555" font-weight="600">fail</text>
+
+  <!-- Blocked 2 -->
+  <g filter="url(#shadow)">
+    <rect x="457" y="200" width="80" height="35" rx="5" fill="url(#boxGrad)" stroke="#E05555" stroke-width="1"/>
+    <rect x="457" y="200" width="4" height="35" rx="2" fill="url(#redBar)"/>
+  </g>
+  <text x="497" y="222" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="10" font-weight="bold" fill="#E05555">Harmful</text>
+
+  <!-- ===== LEGEND ===== -->
+  <rect x="30" y="255" width="840" height="48" rx="4" fill="#111111" stroke="#222" stroke-width="1"/>
+
+  <!-- AI-102 Badge -->
+  <rect x="46" y="265" width="55" height="22" rx="4" fill="url(#blueBar)"/>
+  <text x="73" y="280" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="9" font-weight="700" fill="#FFF">AI-102</text>
+
+  <!-- Concepts -->
+  <text x="116" y="275" font-family="Syne, Calibri, sans-serif" font-size="10" font-weight="600" fill="#FFBF3B">Concepts:</text>
+  <text x="116" y="292" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#999">Prompt Injection Defense  |  Content Safety  |  Defense-in-Depth  |  Responsible AI</text>
+
+  <!-- Objective -->
+  <text x="590" y="275" font-family="Syne, Calibri, sans-serif" font-size="10" font-weight="600" fill="#8DC63F">Objective:</text>
+  <text x="590" y="292" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#999">D1.4 &#x2014; Implement AI solutions responsibly</text>
+
+  <!-- Tech901 watermark -->
+  <text x="854" y="294" text-anchor="end" font-family="Syne, Calibri, sans-serif" font-size="9" font-weight="700" fill="#333">TECH901</text>
+</svg>

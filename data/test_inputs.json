@@ -1,0 +1,14 @@
+[
+  {"id": 1, "type": "text", "input": "My name is Sarah Williams, SSN 456-78-9012. There's a massive pothole on Poplar Avenue near East High School that's been there for weeks.", "expected_pipeline": "text"},
+  {"id": 2, "type": "text", "input": "I live at 123 Beale Street. The streetlight outside my window has been flickering for three days and it keeps my baby awake.", "expected_pipeline": "text"},
+  {"id": 3, "type": "text", "input": "Someone dumped a couch and mattress on the corner of Lamar and Airways. It's been sitting there since Tuesday.", "expected_pipeline": "text"},
+  {"id": 4, "type": "text", "input": "The water pressure at my house on Madison Avenue has been extremely low since yesterday morning.", "expected_pipeline": "text"},
+  {"id": 5, "type": "photo", "input": "data/pothole_01.jpg", "expected_pipeline": "photo"},
+  {"id": 6, "type": "photo", "input": "data/graffiti_02.jpg", "expected_pipeline": "photo"},
+  {"id": 7, "type": "photo", "input": "data/streetlight_03.jpg", "expected_pipeline": "photo"},
+  {"id": 8, "type": "photo", "input": "data/trash_04.jpg", "expected_pipeline": "photo"},
+  {"id": 9, "type": "question", "input": "What are the recycling pickup days for the Cooper-Young neighborhood?", "expected_pipeline": "question"},
+  {"id": 10, "type": "question", "input": "How do I apply for a building permit in Memphis?", "expected_pipeline": "question"},
+  {"id": 11, "type": "question", "input": "What is the noise ordinance for residential areas in Memphis?", "expected_pipeline": "question"},
+  {"id": 12, "type": "question", "input": "Where can I find information about the Memphis parks improvement plan?", "expected_pipeline": "question"}
+]

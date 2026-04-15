@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 475" role="img" aria-labelledby="title desc">
+  <title id="title">Memphis 311 AI Platform Architecture</title>
+  <desc id="desc">Architecture diagram showing the full Memphis 311 AI Platform: citizen input flows through a safety layer, then a routing agent dispatches to NLP, Vision, or RAG pipelines, producing output files.</desc>
+
+  <defs>
+    <linearGradient id="boxGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E1E1E"/>
+      <stop offset="100%" stop-color="#141414"/>
+    </linearGradient>
+    <linearGradient id="amberBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFBF3B"/>
+      <stop offset="100%" stop-color="#E5A530"/>
+    </linearGradient>
+    <linearGradient id="blueBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2D5A94"/>
+      <stop offset="100%" stop-color="#1E3F6B"/>
+    </linearGradient>
+    <linearGradient id="greenBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8DC63F"/>
+      <stop offset="100%" stop-color="#6FA832"/>
+    </linearGradient>
+    <linearGradient id="redBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E05555"/>
+      <stop offset="100%" stop-color="#C04040"/>
+    </linearGradient>
+    <linearGradient id="underlineGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFBF3B"/>
+      <stop offset="100%" stop-color="#E5A530"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+    <marker id="arrowAmber" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#FFBF3B"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#2D5A94"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#8DC63F"/>
+    </marker>
+    <marker id="arrowRed" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#E05555"/>
+    </marker>
+    <marker id="arrowGray" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="475" rx="6" fill="#0A0A0A"/>
+
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="18" font-weight="bold" fill="#FAFAFA">Memphis 311 AI Platform Architecture</text>
+  <rect x="270" y="38" width="360" height="3" rx="1.5" fill="url(#underlineGrad)"/>
+
+  <!-- Stage label -->
+  <text x="25" y="66" font-family="Source Sans 3, Calibri, sans-serif" font-size="10" fill="#888">INPUT &#x2192; VALIDATE &#x2192; ROUTE &#x2192; PROCESS &#x2192; OUTPUT</text>
+
+  <!-- ===== ROW 1: Input → Safety → Router ===== -->
+
+  <!-- Node: CITIZEN INPUT -->
+  <g filter="url(#shadow)">
+    <rect x="30" y="78" width="155" height="85" rx="5" fill="url(#boxGrad)" stroke="#333" stroke-width="1"/>
+    <rect x="30" y="78" width="4" height="85" rx="2" fill="url(#amberBar)"/>
+  </g>
+  <text x="107" y="103" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="12" font-weight="bold" fill="#FFBF3B">CITIZEN INPUT</text>
+  <line x1="46" y1="113" x2="169" y2="113" stroke="#333" stroke-width="1"/>
+  <text x="107" y="130" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="10" fill="#CCC">Text complaints</text>
+  <text x="107" y="145" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="10" fill="#CCC">Photos &#xB7; Questions</text>
+
+  <!-- Arrow 1: Input → Safety -->
+  <line x1="185" y1="120" x2="220" y2="120" stroke="#FFBF3B" stroke-width="1.5" marker-end="url(#arrowAmber)"/>
+  <text x="202" y="111" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#888" font-style="italic">validate</text>
+
+  <!-- Node: SAFETY LAYER -->
+  <g filter="url(#shadow)">
+    <rect x="230" y="78" width="165" height="85" rx="5" fill="url(#boxGrad)" stroke="#333" stroke-width="1"/>
+    <rect x="230" y="78" width="4" height="85" rx="2" fill="url(#amberBar)"/>
+  </g>
+  <text x="312" y="103" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="12" font-weight="bold" fill="#FFBF3B">SAFETY LAYER</text>
+  <line x1="246" y1="113" x2="379" y2="113" stroke="#333" stroke-width="1"/>
+  <text x="312" y="130" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="10" fill="#CCC">Regex patterns (fast)</text>
+  <text x="312" y="145" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="10" fill="#CCC">Content Safety API</text>
+
+  <!-- Arrow 2: Safety → Router -->
+  <line x1="395" y1="120" x2="430" y2="120" stroke="#FFBF3B" stroke-width="1.5" marker-end="url(#arrowAmber)"/>
+  <text x="412" y="111" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#888" font-style="italic">safe</text>
+
+  <!-- Node: ROUTING AGENT -->
+  <g filter="url(#shadow)">
+    <rect x="440" y="78" width="180" height="85" rx="5" fill="url(#boxGrad)" stroke="#333" stroke-width="1"/>
+    <rect x="440" y="78" width="4" height="85" rx="2" fill="url(#blueBar)"/>
+  </g>
+  <text x="530" y="103" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="12" font-weight="bold" fill="#2D5A94">ROUTING AGENT</text>
+  <line x1="456" y1="113" x2="604" y2="113" stroke="#333" stroke-width="1"/>
+  <text x="530" y="130" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="10" fill="#CCC">Azure OpenAI (GPT-4o)</text>
+  <text x="530" y="145" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="10" fill="#CCC">Function calling (D3.1)</text>
+
+  <!-- Exam domain badges on Row 1 -->
+  <rect x="640" y="88" width="42" height="18" rx="4" fill="url(#amberBar)"/>
+  <text x="661" y="101" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="8" font-weight="700" fill="#0A0A0A">D1.4</text>
+  <rect x="640" y="113" width="42" height="18" rx="4" fill="url(#blueBar)"/>
+  <text x="661" y="126" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="8" font-weight="700" fill="#FFF">D3.1</text>
+
+  <!-- ===== BLOCKED branch from Safety ===== -->
+  <line x1="312" y1="163" x2="312" y2="183" stroke="#E05555" stroke-width="1.5" marker-end="url(#arrowRed)"/>
+  <text x="328" y="177" font-family="Source Sans 3, Calibri, sans-serif" font-size="8" fill="#E05555">fail</text>
+
+  <g filter="url(#shadow)">
+    <rect x="275" y="195" width="74" height="30" rx="5" fill="url(#boxGrad)" stroke="#E05555" stroke-width="1"/>
+    <rect x="275" y="195" width="4" height="30" rx="2" fill="url(#redBar)"/>
+  </g>
+  <text x="312" y="214" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="10" font-weight="bold" fill="#E05555">BLOCKED</text>
+
+  <!-- ===== Fan-out arrows: Router → Pipelines ===== -->
+  <line x1="473" y1="163" x2="200" y2="225" stroke="#666" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <line x1="530" y1="163" x2="420" y2="225" stroke="#666" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <line x1="587" y1="163" x2="640" y2="225" stroke="#666" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <!-- Fan-out labels -->
+  <text x="320" y="190" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#888" font-style="italic">text</text>
+  <text x="468" y="190" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#888" font-style="italic">photo</text>
+  <text x="620" y="190" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#888" font-style="italic">question</text>
+
+  <!-- ===== ROW 2: Pipeline boxes ===== -->
+
+  <!-- NLP PIPELINE -->
+  <g filter="url(#shadow)">
+    <rect x="120" y="235" width="160" height="80" rx="5" fill="url(#boxGrad)" stroke="#333" stroke-width="1"/>
+    <rect x="120" y="235" width="4" height="80" rx="2" fill="url(#blueBar)"/>
+  </g>
+  <text x="200" y="258" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="11" font-weight="bold" fill="#2D5A94">NLP PIPELINE</text>
+  <text x="200" y="274" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#CCC">PII &#xB7; Sentiment &#xB7; Intent</text>
+  <rect x="155" y="284" width="90" height="16" rx="8" fill="#1A1A1A" stroke="#2D5A94" stroke-width="1"/>
+  <text x="200" y="296" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="8" fill="#2D5A94" font-weight="600">ACTIVITY 5</text>
+
+  <!-- VISION PIPELINE -->
+  <g filter="url(#shadow)">
+    <rect x="340" y="235" width="160" height="80" rx="5" fill="url(#boxGrad)" stroke="#333" stroke-width="1"/>
+    <rect x="340" y="235" width="4" height="80" rx="2" fill="url(#amberBar)"/>
+  </g>
+  <text x="420" y="258" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="11" font-weight="bold" fill="#FFBF3B">VISION PIPELINE</text>
+  <text x="420" y="274" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#CCC">Classify &#xB7; Describe</text>
+  <rect x="375" y="284" width="90" height="16" rx="8" fill="#1A1A1A" stroke="#FFBF3B" stroke-width="1"/>
+  <text x="420" y="296" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="8" fill="#FFBF3B" font-weight="600">ACTIVITY 4</text>
+
+  <!-- RAG PIPELINE -->
+  <g filter="url(#shadow)">
+    <rect x="560" y="235" width="160" height="80" rx="5" fill="url(#boxGrad)" stroke="#333" stroke-width="1"/>
+    <rect x="560" y="235" width="4" height="80" rx="2" fill="url(#greenBar)"/>
+  </g>
+  <text x="640" y="258" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="11" font-weight="bold" fill="#8DC63F">RAG PIPELINE</text>
+  <text x="640" y="274" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#CCC">Search &#xB7; Ground &#xB7; Cite</text>
+  <rect x="595" y="284" width="90" height="16" rx="8" fill="#1A1A1A" stroke="#8DC63F" stroke-width="1"/>
+  <text x="640" y="296" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="8" fill="#8DC63F" font-weight="600">ACTIVITY 7</text>
+
+  <!-- ===== Convergence arrows: Pipelines → Output ===== -->
+  <line x1="200" y1="315" x2="330" y2="340" stroke="#8DC63F" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <line x1="420" y1="315" x2="400" y2="340" stroke="#8DC63F" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <line x1="640" y1="315" x2="470" y2="340" stroke="#8DC63F" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+
+  <!-- ===== ROW 3: Output Files ===== -->
+  <g filter="url(#shadow)">
+    <rect x="260" y="352" width="280" height="45" rx="5" fill="url(#boxGrad)" stroke="#333" stroke-width="1"/>
+    <rect x="260" y="352" width="4" height="45" rx="2" fill="url(#greenBar)"/>
+  </g>
+  <text x="400" y="372" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="11" font-weight="bold" fill="#8DC63F">OUTPUT FILES</text>
+  <text x="400" y="388" text-anchor="middle" font-family="Source Sans 3, Calibri, sans-serif" font-size="10" fill="#CCC">result.json &#xB7; design.json &#xB7; eval_report.json</text>
+
+  <!-- ===== LEGEND ===== -->
+  <rect x="30" y="410" width="840" height="45" rx="4" fill="#111111" stroke="#222" stroke-width="1"/>
+
+  <!-- AI-102 Badge -->
+  <rect x="46" y="420" width="55" height="22" rx="4" fill="url(#blueBar)"/>
+  <text x="73" y="435" text-anchor="middle" font-family="Syne, Calibri, sans-serif" font-size="9" font-weight="700" fill="#FFF">AI-102</text>
+
+  <!-- Concepts -->
+  <text x="116" y="430" font-family="Syne, Calibri, sans-serif" font-size="10" font-weight="600" fill="#FFBF3B">Concepts:</text>
+  <text x="116" y="446" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#999">Agent Routing  |  Function Calling  |  Defense-in-Depth  |  Multi-Service Integration</text>
+
+  <!-- Objectives -->
+  <text x="590" y="430" font-family="Syne, Calibri, sans-serif" font-size="10" font-weight="600" fill="#8DC63F">Domains:</text>
+  <text x="590" y="446" font-family="Source Sans 3, Calibri, sans-serif" font-size="9" fill="#999">D1.4, D2.2, D3.1, D4.1, D5.1, D6.1</text>
+
+  <!-- Tech901 watermark -->
+  <text x="854" y="448" text-anchor="end" font-family="Syne, Calibri, sans-serif" font-size="9" font-weight="700" fill="#333">TECH901</text>
+</svg>
